@@ -4,6 +4,7 @@
   "codeowners": ["@LauR3y"],
   "config_flow": true,
   "documentation": "https://github.com/LauR3y/hacs-ai-token-usage",
+  "issue_tracker": "https://github.com/LauR3y/hacs-ai-token-usage/issues",
   "iot_class": "cloud_polling",
   "requirements": ["aiohttp>=3.8.0"],
   "version": "1.0.0"
