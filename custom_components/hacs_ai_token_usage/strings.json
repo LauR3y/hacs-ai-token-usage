@@ -14,7 +14,9 @@
       }
     },
     "error": {
-      "cannot_connect": "Cannot connect to OpenAI API. Check your API key and organization ID."
+      "cannot_connect": "Cannot connect to OpenAI API. Check your API key and organization ID.",
+      "access_forbidden": "Access forbidden (403). Ensure your API key has admin privileges and org ID is correct.",
+      "invalid_auth": "Invalid authentication (401). Check your API key."
     },
     "abort": {
       "already_configured": "This API key is already configured."

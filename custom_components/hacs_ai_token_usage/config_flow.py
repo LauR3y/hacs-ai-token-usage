@@ -1,3 +1,4 @@
+import aiohttp
 import voluptuous as vol
 from homeassistant import config_entries
 from homeassistant.core import callback
@@ -24,6 +25,13 @@ class HacsAiTokenUsageConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     title=f"OpenAI Usage ({user_input[CONF_API_KEY][:8]}...)",
                     data=user_input,
                 )
+            except aiohttp.ClientError as e:
+                if e.status == 403:
+                    errors["base"] = "access_forbidden"
+                elif e.status == 401:
+                    errors["base"] = "invalid_auth"
+                else:
+                    errors["base"] = "cannot_connect"
             except Exception as e:
                 errors["base"] = "cannot_connect"
 
