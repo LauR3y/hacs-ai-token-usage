@@ -1,0 +1,23 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Configure OpenAI Token Usage",
+        "data": {
+          "api_key": "OpenAI API Key",
+          "org_id": "Organization ID (optional)"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Reauthenticate",
+        "description": "Your OpenAI API key has expired. Please re-enter it."
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect to OpenAI API. Check your API key and organization ID."
+    },
+    "abort": {
+      "already_configured": "This API key is already configured."
+    }
+  }
+}
