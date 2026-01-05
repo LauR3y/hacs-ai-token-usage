@@ -1,10 +1,13 @@
 import aiohttp
+import logging
 import voluptuous as vol
 from homeassistant import config_entries
 from homeassistant.core import callback
 from homeassistant.helpers import aiohttp_client
 from .api import OpenAIClient
 from .const import CONF_API_KEY, CONF_ORG_ID, DOMAIN
+
+_LOGGER = logging.getLogger(__name__)
 
 
 class HacsAiTokenUsageConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
@@ -26,6 +29,7 @@ class HacsAiTokenUsageConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     data=user_input,
                 )
             except aiohttp.ClientResponseError as e:
+                _LOGGER.error("OpenAI API error: %s - %s", e.status, e.message)
                 if e.status == 403:
                     errors["base"] = "access_forbidden"
                 elif e.status == 401:
@@ -33,6 +37,10 @@ class HacsAiTokenUsageConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 else:
                     errors["base"] = "cannot_connect"
             except aiohttp.ClientError as e:
+                _LOGGER.error("OpenAI API connection failed: %s", e)
+                errors["base"] = "cannot_connect"
+            except Exception as e:
+                _LOGGER.error("Unexpected error during OpenAI API validation: %s", e)
                 errors["base"] = "cannot_connect"
             except Exception as e:
                 errors["base"] = "cannot_connect"
