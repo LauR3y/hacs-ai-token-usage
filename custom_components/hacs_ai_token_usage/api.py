@@ -22,8 +22,8 @@ class OpenAIClient:
         start_date = end_date - timedelta(days=1)
 
         params = {
-            "date_start": start_date.strftime("%Y-%m-%d"),
-            "date_end": end_date.strftime("%Y-%m-%d"),
+            "start_time": int(start_date.timestamp()),
+            "end_time": int(end_date.timestamp()),
             "group_by": "model",  # Group by model for breakdowns
         }
 
